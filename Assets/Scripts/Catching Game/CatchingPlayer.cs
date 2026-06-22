@@ -72,6 +72,13 @@ public class CatchingPlayer : MonoBehaviour
         }
     }
 
+    public void StopMoving()
+    {
+        body.linearVelocity = new Vector2(0, 0);
+        anim.SetBool("move", false);
+        state = State.NoMove;
+    }
+
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
     //    if (collision.gameObject.tag == "Supply")

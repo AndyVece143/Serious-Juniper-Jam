@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
@@ -13,6 +14,8 @@ public class FallingObject : MonoBehaviour
     public LaunchArea launchArea;
 
     public bool screenTime;
+    public bool despawn = false;
+    private float launchTimer = 2;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,13 +28,20 @@ public class FallingObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (screenTime == false)
+        if (screenTime == false && despawn == false)
         {
             transform.Rotate(Vector3.forward * 360 * Time.deltaTime);
         }
-        else
+
+
+        if (screenTime == true)
         {
             transform.localScale += Vector3.one * 1f * Time.deltaTime;
+            launchTimer -= Time.deltaTime;
+            if (launchTimer <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -60,7 +70,7 @@ public class FallingObject : MonoBehaviour
     {
         if (collision.gameObject.tag != "Player")
         {
-            Destroy(gameObject);
+            StartCoroutine(Despawning(1));
         }
     }
 
@@ -81,5 +91,26 @@ public class FallingObject : MonoBehaviour
         int i = Random.Range(4, 9);
         Debug.Log(i);
         body.linearVelocity = new Vector2(-speed, i);
+    }
+
+    IEnumerator Despawning(float duration)
+    {
+        despawn = true;
+        body.linearVelocity = new Vector2(0, 3);
+        boxCollider.enabled = false;
+        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+        Color startColor = renderer.color;
+        //Debug.Log(startColor);
+        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0);
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            renderer.color = Color.Lerp(startColor, endColor, time / duration);
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 }
