@@ -15,12 +15,20 @@ public class Player : MonoBehaviour
     public State state;
     public float dampSpeed;
 
+    public SpriteRenderer inspectIcon;
+    public SpriteRenderer talkIcon;
+    public SpriteRenderer goIcon;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         anim = GetComponent<Animator>();
+
+        inspectIcon.enabled = false;
+        talkIcon.enabled = false;
+        goIcon.enabled = false;
     }
 
     // Update is called once per frame
@@ -34,6 +42,7 @@ public class Player : MonoBehaviour
             case State.NoMove:
                 break;
         }
+        IconRotations();
     }
 
     private void Movement()
@@ -70,6 +79,23 @@ public class Player : MonoBehaviour
         anim.SetInteger("react", 0);
     }
 
+    private void IconRotations()
+    {
+        if (transform.localScale.x == 1)
+        {
+            inspectIcon.transform.localScale = Vector3.one;
+            talkIcon.transform.localScale = Vector3.one;
+            goIcon.transform.localScale = Vector3.one;
+        }
+
+        if (transform.localScale.x == -1)
+        {
+            inspectIcon.transform.localScale = new Vector3(-1, 1, 1);
+            talkIcon.transform.localScale = new Vector3(-1, 1, 1);
+            goIcon.transform.localScale = new Vector3(-1, 1, 1);
+        }
+    }
+
     public IEnumerator GoToPlace(Vector2 location, float duration)
     {
         float time = 0;
@@ -93,5 +119,43 @@ public class Player : MonoBehaviour
 
         body.linearVelocity = new Vector2(0, 0);
         anim.SetBool("move", false);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Inspect" && state != State.NoMove)
+        {
+            inspectIcon.enabled = true;
+
+            if (collision.gameObject.GetComponent<InteractableObject>().checker == false)
+            {
+                inspectIcon.color = Color.white;
+            }
+            else
+            {
+                inspectIcon.color = Color.gray;
+            }
+        }
+
+        //if (collision.gameObject.tag == "NPC" && state != State.NoMove)
+        //{
+        //    talkIcon.enabled = true;
+        //    if (collision.gameObject.GetComponent<NPC>().checker == false)
+        //    {
+        //        talkIcon.color = Color.white;
+        //    }
+        //    else
+        //    {
+        //        talkIcon.color = Color.gray;
+        //    }
+        //}
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Inspect")
+        {
+            inspectIcon.enabled = false;
+        }
     }
 }

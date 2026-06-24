@@ -48,6 +48,11 @@ public class BigDialogue : MonoBehaviour
     public float dampSpeed;
     public Player player;
 
+    public bool level2;
+    private Floor2Manager floor2Manager;
+
+    public bool canPlayerMove;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -56,8 +61,14 @@ public class BigDialogue : MonoBehaviour
         canvas.worldCamera = Camera.main;
         mainText.text = string.Empty;
         mainCamera = CameraController.FindAnyObjectByType<CameraController>();
-        mainCamera.state = CameraController.State.StayStill;
+        //mainCamera.state = CameraController.State.StayStill;
         nameText.text = names[0];
+
+        if (level2)
+        {
+            floor2Manager = Floor2Manager.FindAnyObjectByType<Floor2Manager>();
+        }
+        player = Player.FindAnyObjectByType<Player>();
 
         BeginningSprite();
         SetPositions();
@@ -286,6 +297,17 @@ public class BigDialogue : MonoBehaviour
         //    player.state = Player.State.Standard;
         //    mainCamera.state = CameraController.State.FollowPlayer;
         //}
+
+        if (canPlayerMove)
+        {
+            player.state = Player.State.Standard;
+            mainCamera.state = CameraController.State.FollowPlayer;
+        }
+
+        if (level2)
+        {
+            floor2Manager.StartCutscene();
+        }
 
 
         Destroy(gameObject);

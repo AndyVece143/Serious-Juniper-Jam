@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2687510426660995548}
   - component: {fileID: 3186728288244414779}
   m_Layer: 5
-  m_Name: Blaze1
+  m_Name: Blaze3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,43 +58,46 @@ MonoBehaviour:
   mainText: {fileID: 9114409747633259833}
   nameText: {fileID: 2320293248993488831}
   lines:
-  - Yo! You must be the new hire! Welcome!
-  - (...who is this guy? Is he an employee? It can't be.)
-  - (That outfit is way too flashy for the office. Plus, he's not wearing proper
-    pants! And those sunglasses!)
-  - (I should just respond politely.)
-  - Good morning. Would I be right to assume that you are an employee at this company.
-  - Sure am! Name's Blaze. The big boss told us all about your arrival!
-  - '...that''s wonderful. My name is Gloria. (Why does he talk so informally? I
-    was told this was a serious company.) '
-  - ...anyway, I am supposed to meet the boss here. Would you happen to know where
-    they are?
-  - Ah yes, there's been a change in plans. I'm gonna lead the first part of your
-    orientation. That sound good?
-  - 'I guess it can''t be helped. I''ll follow your lead. I promise to listen carefully. '
-  - Radical! I guess I should explain what this company does, and how you'll fit
-    in.
-  - That would be most optimal. The interview process was very vague about the company
-    itself.
-  - Alright, so first off...
+  - Okay, it seems that everything is in order. Nothing of value was damaged in the
+    scuffle.
+  - Woohoo, Gloria! That was incredible! You sure showed that earthquake who's boss.
+  - It needed to be done. A good employee should always do their best to take care
+    of office equipment.
+  - Anyway, what were we about to discuss before we were interrupted?
+  - Well, I WAS gonna talk about emergency protocols, but after seeing you handle
+    an emergency like a boss...
+  - ...I think we can safely say that you know how to conduct yourself in an emergency.
+  - '(Really? I think you''re supposed to take cover under a desk during an earthquake.) '
+  - '(I guess I subconsciously figured out that it wasn''t a bad earthquake and lept
+    to action.) '
+  - Well, if you say so. Now, what is next for my orientation?
+  - You'll be going to the next floor up and meeting with one of my colleagues for
+    the next section.
+  - The big boss says you should spend a little time with everyone to get you more
+    comfortable with working with us.
+  - Huh, I guess that makes sense. It would be good to meet everyone before I seriously
+    begin working.
+  - Glad you agree. The elevator is right behind me. See ya later, Gloria!
+  - Likewise, Blaze.
   textSpeed: 0.01
-  talkChanges: 00010000000101000101010101
-  emotionChanges: 01000000020000000000000000000000000000000200000000000000000000000000000001000000020000000000000000000000
+  talkChanges: 0001010001000100000100010101
+  emotionChanges: 0000000002000000010000000000000000000000010000000200000002000000000000000100000001000000000000000200000001000000
   names:
-  - ???
-  - Gloria
-  - Gloria
-  - Gloria
   - Gloria
   - Blaze
   - Gloria
   - Gloria
   - Blaze
+  - Blaze
   - Gloria
+  - Gloria
+  - Gloria
+  - Blaze
   - Blaze
   - Gloria
   - Blaze
-  character1Talking: 0
+  - Gloria
+  character1Talking: 1
   canvas: {fileID: 0}
   character1: {fileID: 4464958984068739983}
   character2: {fileID: 6242002958175931593}
@@ -108,7 +111,8 @@ MonoBehaviour:
   ready: 0
   dampSpeed: 7
   player: {fileID: 0}
-  level2: 1
+  level2: 0
+  canPlayerMove: 1
 --- !u!223 &4543169848147619340
 Canvas:
   m_ObjectHideFlags: 0
@@ -398,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac3e38585620d4d458eeea3d66cfbc8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Portrait
-  isActiveSpeaker: 1
+  isActiveSpeaker: 0
   image: {fileID: 2130305109623728631}
   anim: {fileID: 7954779886733873091}
 --- !u!95 &7954779886733873091
@@ -626,7 +630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac3e38585620d4d458eeea3d66cfbc8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Portrait
-  isActiveSpeaker: 0
+  isActiveSpeaker: 1
   image: {fileID: 4831513515374715240}
   anim: {fileID: 673899546477986190}
 --- !u!95 &673899546477986190

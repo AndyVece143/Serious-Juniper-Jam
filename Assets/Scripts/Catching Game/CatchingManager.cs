@@ -20,11 +20,12 @@ public class CatchingManager : MonoBehaviour
     public float gameTimer = 60;
 
     private bool frenzyMode = false;
+    public LevelLoader loader;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        MinigameTextBox newTextBox = Instantiate(minigameTextBox);
+
         StartCoroutine(StartGame());
     }
 
@@ -59,7 +60,8 @@ public class CatchingManager : MonoBehaviour
             if (gameTimer < 0)
             {
                 player.StopMoving();
-                MinigameTextBox ending = Instantiate(endingBox);
+                StartCoroutine(EndGame());
+
                 gameTimer = 0;
                 gameStarted = false;
             }
@@ -80,7 +82,20 @@ public class CatchingManager : MonoBehaviour
 
     IEnumerator StartGame()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(0.5f);
+        MinigameTextBox newTextBox = Instantiate(minigameTextBox);
+        yield return new WaitForSeconds(4f);
         gameStarted = true;
+    }
+
+    IEnumerator EndGame()
+    {
+        MinigameTextBox ending = Instantiate(endingBox);
+        yield return new WaitForSeconds(4);
+
+        if (StaticData.storyMode == true)
+        {
+            loader.LoadNextLevel("Floor2");
+        }
     }
 }

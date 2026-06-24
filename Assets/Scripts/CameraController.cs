@@ -7,11 +7,14 @@ public class CameraController : MonoBehaviour
     private Vector3 offset = new Vector3(0f, 0f, -10f);
     private float smoothTime = 0.15f;
     private Vector3 velocity = Vector3.zero;
+    private Vector3 initialShakePosition;
+    public float shakeAmount;
 
     public enum State
     {
         FollowPlayer,
         StayStill,
+        Earthquake,
     }
     public State state;
     public State initialState;
@@ -31,6 +34,9 @@ public class CameraController : MonoBehaviour
                 FollowPlayer();
                 break;
             case State.StayStill:
+                break;
+            case State.Earthquake:
+                Earthquake();
                 break;
         }
 
@@ -52,6 +58,17 @@ public class CameraController : MonoBehaviour
         }
 
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+    }
+
+    private void Earthquake()
+    {
+        transform.position = initialShakePosition + Random.insideUnitSphere * shakeAmount;
+    }
+
+    public void SwitchToEarthquake()
+    {
+        initialShakePosition = transform.position;
+        state = State.Earthquake;
     }
 
     public IEnumerator GoToPlace(Vector3 location, float duration)

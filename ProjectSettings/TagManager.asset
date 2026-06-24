@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Supply
   - BadSupply
+  - Inspect
   layers:
   - Default
   - TransparentFX

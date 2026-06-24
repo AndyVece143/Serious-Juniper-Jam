@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.UI;
 
 public class WheelManager : MonoBehaviour
 {
@@ -14,33 +15,43 @@ public class WheelManager : MonoBehaviour
     public float energy;
     public float stamina;
 
-    public TextMeshProUGUI energyText;
-    public TextMeshProUGUI staminaText;
+    //public TextMeshProUGUI energyText;
+    //public TextMeshProUGUI staminaText;
+    public Slider energySlider;
+    public Slider staminaSlider;
+
     public bool recovering = false;
 
     public WheelPlayer player;
+
+    public MinigameTextBox minigameTextBox;
+    public MinigameTextBox endingBox;
+    private bool gameStarted = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        MinigameTextBox newTextBox = Instantiate(minigameTextBox);
+        StartCoroutine(StartGame());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (recovering == false)
+        if (gameStarted == true)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (recovering == false)
             {
-                spinSpeed += 25;
-
-                if (spinSpeed > 250)
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    spinSpeed = 250;
+                    spinSpeed += 25;
+
+                    if (spinSpeed > 250)
+                    {
+                        spinSpeed = 250;
+                    }
                 }
             }
         }
-
 
         wheel.transform.Rotate(Vector3.forward * -spinSpeed * Time.deltaTime);
 
@@ -51,9 +62,11 @@ public class WheelManager : MonoBehaviour
             spinSpeed = 0;
         }
 
-        energy += (spinSpeed / 1000);
-        energyText.text = "" + energy;
-        staminaText.text = "" + stamina;
+        energy += ((spinSpeed / 5) * Time.deltaTime);
+        //energyText.text = "" + energy;
+        //staminaText.text = "" + stamina;
+        energySlider.value = energy;
+        staminaSlider.value = stamina;
 
         LightChecker();
         StaminaCheck();
@@ -71,32 +84,34 @@ public class WheelManager : MonoBehaviour
             light2.TurnOnLight();
         }
 
-        if (energy > 1500)
+        if (energy > 1500 && gameStarted == true)
         {
             light3.TurnOnLight();
             globalLight.intensity = 1;
+            MinigameTextBox ending = Instantiate(endingBox);
+            gameStarted = false;
         }
     }
 
     void StaminaCheck()
     {
-        if (spinSpeed > 90)
+        if (spinSpeed > 130)
         {
             stamina -= (0.5f * Time.deltaTime);
         }
-        if (spinSpeed > 150)
+        if (spinSpeed > 180)
         {
             stamina -= Time.deltaTime;
         }
 
-        if (spinSpeed > 210)
+        if (spinSpeed > 230)
         {
             stamina -= (2 *Time.deltaTime);
         }
 
-        if (spinSpeed <= 50)
+        if (spinSpeed <= 100)
         {
-            stamina += Time.deltaTime;
+            stamina += (2 * Time.deltaTime);
         }
 
         if (stamina <= 0 && recovering == false)
@@ -128,5 +143,11 @@ public class WheelManager : MonoBehaviour
         stamina = 20;
         recovering = false;
         player.GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(4);
+        gameStarted = true;
     }
 }
