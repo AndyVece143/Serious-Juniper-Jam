@@ -137,6 +137,25 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (collision.gameObject.tag == "NPC" && state != State.NoMove)
+        {
+            talkIcon.enabled = true;
+
+            if (collision.gameObject.GetComponent<NPC>().checker == false)
+            {
+                talkIcon.color = Color.white;
+            }
+            else
+            {
+                talkIcon.color = Color.gray;
+            }
+        }
+
+        if (collision.gameObject.tag == "Door" && state != State.NoMove)
+        {
+            goIcon.enabled = true;
+        }
+
         //if (collision.gameObject.tag == "NPC" && state != State.NoMove)
         //{
         //    talkIcon.enabled = true;
@@ -156,6 +175,16 @@ public class Player : MonoBehaviour
         if (collision.gameObject.tag == "Inspect")
         {
             inspectIcon.enabled = false;
+        }
+
+        if (collision.gameObject.tag == "NPC")
+        {
+            talkIcon.enabled = false;
+        }
+
+        if (collision.gameObject.tag == "Door")
+        {
+            goIcon.enabled = false;
         }
     }
 }

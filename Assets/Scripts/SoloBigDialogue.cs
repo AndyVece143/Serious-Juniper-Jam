@@ -38,6 +38,9 @@ public class SoloBigDialogue : MonoBehaviour
 
     public bool level2;
     private Floor2Manager floor2Manager;
+
+    public bool level3;
+    private Floor3Manager floor3Manager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -50,9 +53,19 @@ public class SoloBigDialogue : MonoBehaviour
 
         nameText.text = "Gloria";
 
+        if (sceneTransition)
+        {
+            loader = LevelLoader.FindAnyObjectByType<LevelLoader>();
+        }
+
         if (level2)
         {
             floor2Manager = Floor2Manager.FindAnyObjectByType<Floor2Manager>();
+        }
+
+        if (level3)
+        {
+            floor3Manager = Floor3Manager.FindAnyObjectByType<Floor3Manager>();
         }
         BeginningSprite();
         SetPositions();
@@ -184,6 +197,11 @@ public class SoloBigDialogue : MonoBehaviour
         if (level2)
         {
             floor2Manager.StartCutscene();
+        }
+
+        if (level3)
+        {
+            floor3Manager.StartCutscene();
         }
         mainCamera.state = mainCamera.initialState;
 

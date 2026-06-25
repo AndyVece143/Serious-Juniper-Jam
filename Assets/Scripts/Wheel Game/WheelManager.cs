@@ -27,6 +27,7 @@ public class WheelManager : MonoBehaviour
     public MinigameTextBox minigameTextBox;
     public MinigameTextBox endingBox;
     private bool gameStarted = false;
+    public LevelLoader loader;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -88,7 +89,8 @@ public class WheelManager : MonoBehaviour
         {
             light3.TurnOnLight();
             globalLight.intensity = 1;
-            MinigameTextBox ending = Instantiate(endingBox);
+            StartCoroutine(EndGame());
+
             gameStarted = false;
         }
     }
@@ -149,5 +151,16 @@ public class WheelManager : MonoBehaviour
     {
         yield return new WaitForSeconds(4);
         gameStarted = true;
+    }
+
+    IEnumerator EndGame()
+    {
+        MinigameTextBox ending = Instantiate(endingBox);
+        yield return new WaitForSeconds(4);
+
+        if (StaticData.storyMode == true)
+        {
+            loader.LoadNextLevel("Floor3");
+        }
     }
 }

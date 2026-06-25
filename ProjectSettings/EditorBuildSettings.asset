@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CatchingGame.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
+    path: Assets/Scenes/Floor3.unity
+    guid: 505ecb5789bf50d42a295cbdb5d33dbf
+  - enabled: 1
     path: Assets/Scenes/WheelGame.unity
     guid: fc230789bf663d44f8ce0b2d5951379d
   m_configObjects:
