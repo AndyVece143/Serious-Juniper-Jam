@@ -15,6 +15,7 @@ public class CameraController : MonoBehaviour
         FollowPlayer,
         StayStill,
         Earthquake,
+        Sliding,
     }
     public State state;
     public State initialState;
@@ -38,6 +39,9 @@ public class CameraController : MonoBehaviour
             case State.Earthquake:
                 Earthquake();
                 break;
+            case State.Sliding:
+                Sliding();
+                break;
         }
 
         transform.position = new Vector3(transform.position.x, transform.position.y, -10);
@@ -60,6 +64,12 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
     }
 
+    private void Sliding()
+    {
+        Vector3 targetPosition = player.position + offset;
+
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+    }
     private void Earthquake()
     {
         transform.position = initialShakePosition + Random.insideUnitSphere * shakeAmount;
