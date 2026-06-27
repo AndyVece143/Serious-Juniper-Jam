@@ -18,6 +18,7 @@ public class CatchingPlayer : MonoBehaviour
     public CatchingManager manager;
     [SerializeField] private LayerMask groundLayer;
     public float hitStunTime;
+    public AudioClip hurt;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,6 +28,7 @@ public class CatchingPlayer : MonoBehaviour
         anim = GetComponent<Animator>();
         //state = State.NoMove;
         anim.SetBool("bucket", true);
+        state = State.NoMove;
     }
 
     // Update is called once per frame
@@ -104,6 +106,7 @@ public class CatchingPlayer : MonoBehaviour
 
         if (collision.gameObject.tag == "BadSupply")
         {
+            SoundManager.instance.PlaySound(hurt);
             KnockBack();
             collision.gameObject.GetComponent<FallingObject>().boxCollider.enabled = false;
             collision.gameObject.GetComponent<FallingObject>().screenTime = true;

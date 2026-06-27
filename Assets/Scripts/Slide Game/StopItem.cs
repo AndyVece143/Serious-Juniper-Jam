@@ -9,6 +9,7 @@ public class StopItem : MonoBehaviour
     private Color fullColor;
     private Color transparent;
     private SpriteRenderer spriteRenderer;
+    public SlidingManager manager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +18,7 @@ public class StopItem : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         fullColor = spriteRenderer.color;
         transparent = new Color(fullColor.r, fullColor.g, fullColor.b, 0);
+        manager = SlidingManager.FindAnyObjectByType<SlidingManager>();
         StartCoroutine(SpawnIn());
     }
 
@@ -43,5 +45,15 @@ public class StopItem : MonoBehaviour
             yield return null;
         }
         boxCollider.enabled = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            collision.gameObject.GetComponent<SlidingPlayer>().SlowSpin();
+            manager.NewItem();
+            Destroy(gameObject);
+        }
     }
 }

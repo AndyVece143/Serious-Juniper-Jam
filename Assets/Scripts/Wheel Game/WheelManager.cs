@@ -162,5 +162,9 @@ public class WheelManager : MonoBehaviour
         {
             loader.LoadNextLevel("Floor3");
         }
+        else
+        {
+            loader.LoadNextLevel("Minigames");
+        }
     }
 }

@@ -21,6 +21,7 @@ public class CatchingManager : MonoBehaviour
 
     private bool frenzyMode = false;
     public LevelLoader loader;
+    public AudioClip scoreSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -77,6 +78,7 @@ public class CatchingManager : MonoBehaviour
 
     public void IncreaseScore()
     {
+        SoundManager.instance.PlaySound(scoreSound);
         score++;
     }
 
@@ -86,6 +88,7 @@ public class CatchingManager : MonoBehaviour
         MinigameTextBox newTextBox = Instantiate(minigameTextBox);
         yield return new WaitForSeconds(4f);
         gameStarted = true;
+        player.state = CatchingPlayer.State.Standard;
     }
 
     IEnumerator EndGame()
@@ -96,6 +99,10 @@ public class CatchingManager : MonoBehaviour
         if (StaticData.storyMode == true)
         {
             loader.LoadNextLevel("Floor2");
+        }
+        else
+        {
+            loader.LoadNextLevel("Minigames");
         }
     }
 }

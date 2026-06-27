@@ -41,6 +41,9 @@ public class SoloBigDialogue : MonoBehaviour
 
     public bool level3;
     private Floor3Manager floor3Manager;
+
+    public bool level4;
+    private Floor4Manager floor4Manager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -66,6 +69,11 @@ public class SoloBigDialogue : MonoBehaviour
         if (level3)
         {
             floor3Manager = Floor3Manager.FindAnyObjectByType<Floor3Manager>();
+        }
+
+        if (level4)
+        {
+            floor4Manager = Floor4Manager.FindAnyObjectByType<Floor4Manager>();
         }
         BeginningSprite();
         SetPositions();
@@ -203,6 +211,11 @@ public class SoloBigDialogue : MonoBehaviour
         {
             floor3Manager.StartCutscene();
         }
+        if (level4)
+        {
+            floor4Manager.StartCutscene();
+        }
+
         mainCamera.state = mainCamera.initialState;
 
         Destroy(gameObject);

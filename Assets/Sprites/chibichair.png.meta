@@ -260,10 +260,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 8ee6d91bff4573c50800000000000000
-      internalID: 6644873232381734632
+      spriteID: 290ebb21c6f9fb942a006f320f596cf0
+      internalID: 308072972
       vertices: []
       indices: 
       edges: []
@@ -282,10 +282,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 10629483c8c0e4ae0800000000000000
-      internalID: -1563298224271710719
+      spriteID: a733ffc2f00b0ed4ab65a03779c1813f
+      internalID: -191686960
       vertices: []
       indices: 
       edges: []
@@ -304,10 +304,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 89c218a3f8eb43c70800000000000000
-      internalID: 8949987881863163032
+      spriteID: 8d597b9c06238224082af87fa7707bc4
+      internalID: -1470647390
       vertices: []
       indices: 
       edges: []
@@ -326,10 +326,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fbbf22b365c39b700800000000000000
-      internalID: 556542370013969343
+      spriteID: 294a7c8b3ee7593429356476aa502058
+      internalID: -617001839
       vertices: []
       indices: 
       edges: []
@@ -338,7 +338,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 1a6d8acc4780fb84bb4b3673f43c2843
+    spriteID: 261a3b9c02bf04247a3ab22286d6f2d8
     internalID: 0
     vertices: []
     indices: 
@@ -355,10 +355,10 @@ TextureImporter:
       chibichair_2: 3180183536356931832
       chibichair_3: -1561687238302509665
       chibichair_4: 4258071769354190673
-      chibichair_5: 6644873232381734632
-      chibichair_6: -1563298224271710719
-      chibichair_7: 8949987881863163032
-      chibichair_8: 556542370013969343
+      chibichair_5: 308072972
+      chibichair_6: -191686960
+      chibichair_7: -1470647390
+      chibichair_8: -617001839
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

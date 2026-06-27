@@ -54,6 +54,9 @@ public class BigDialogue : MonoBehaviour
     public bool level3;
     private Floor3Manager floor3Manager;
 
+    public bool level4;
+    private Floor4Manager floor4Manager;
+
     public bool canPlayerMove;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -74,6 +77,10 @@ public class BigDialogue : MonoBehaviour
         if (level3)
         {
             floor3Manager = Floor3Manager.FindAnyObjectByType<Floor3Manager>();
+        }
+        if (level4)
+        {
+            floor4Manager = Floor4Manager.FindAnyObjectByType<Floor4Manager>();
         }
         player = Player.FindAnyObjectByType<Player>();
 
@@ -318,6 +325,10 @@ public class BigDialogue : MonoBehaviour
         if (level3)
         {
             floor3Manager.StartCutscene();
+        }
+        if (level4)
+        {
+            floor4Manager.StartCutscene();
         }
 
         Destroy(gameObject);

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SlidingPlayer : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class SlidingPlayer : MonoBehaviour
     private Rigidbody2D body;
     private BoxCollider2D boxCollider;
     public Animator anim;
+    public float spinSpeed = 1.0f;
 
     public enum State
     {
@@ -15,7 +17,7 @@ public class SlidingPlayer : MonoBehaviour
     }
     public State state;
 
-    public CatchingManager manager;
+    public Slider slider;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,6 +39,9 @@ public class SlidingPlayer : MonoBehaviour
                 break;
 
         }
+
+        anim.speed = spinSpeed;
+        slider.value = spinSpeed;
     }
 
     private void Movement()
@@ -47,5 +52,19 @@ public class SlidingPlayer : MonoBehaviour
         body.AddForce(new Vector2(0f, verticalInput * speed * 1), ForceMode2D.Force);
 
         body.linearVelocity = new Vector2(Mathf.Clamp(body.linearVelocity.x, -speed, speed), (Mathf.Clamp(body.linearVelocity.y, -speed, speed)));
+    }
+
+    public void SlowSpin()
+    {
+        spinSpeed -= 0.1f;
+        speed -= 0.3f;
+    }
+
+    public void StopSpinning()
+    {
+        body.linearVelocity = new Vector2(0, 0);
+        anim.SetTrigger("still");
+        state = State.NoMove;
+        spinSpeed = 0;
     }
 }
