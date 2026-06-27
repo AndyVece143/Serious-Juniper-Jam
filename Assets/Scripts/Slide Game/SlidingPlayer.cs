@@ -33,7 +33,6 @@ public class SlidingPlayer : MonoBehaviour
         switch (state)
         {
             case State.Standard:
-                Movement();
                 break;
             case State.NoMove:
                 break;
@@ -44,14 +43,23 @@ public class SlidingPlayer : MonoBehaviour
         slider.value = spinSpeed;
     }
 
+    private void FixedUpdate()
+    {
+        if (state == State.Standard)
+        {
+            float horizontalInput = Input.GetAxis("Horizontal");
+            float verticalInput = Input.GetAxis("Vertical");
+            body.AddForce(new Vector2((horizontalInput * speed * 4), 0f), ForceMode2D.Force);
+            body.AddForce(new Vector2(0f, (verticalInput * speed * 4)), ForceMode2D.Force);
+
+            body.linearVelocity = new Vector2(Mathf.Clamp(body.linearVelocity.x, -speed, speed), (Mathf.Clamp(body.linearVelocity.y, -speed, speed)));
+        }
+
+    }
+
     private void Movement()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
-        body.AddForce(new Vector2(horizontalInput * speed * 1, 0f), ForceMode2D.Force);
-        body.AddForce(new Vector2(0f, verticalInput * speed * 1), ForceMode2D.Force);
 
-        body.linearVelocity = new Vector2(Mathf.Clamp(body.linearVelocity.x, -speed, speed), (Mathf.Clamp(body.linearVelocity.y, -speed, speed)));
     }
 
     public void SlowSpin()

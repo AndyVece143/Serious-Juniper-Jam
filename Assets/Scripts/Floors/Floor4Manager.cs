@@ -1,5 +1,4 @@
 using System.Collections;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class Floor4Manager : MonoBehaviour
@@ -21,6 +20,7 @@ public class Floor4Manager : MonoBehaviour
     public BigDialogue dialogue4;
     public BigDialogue dialogue5;
     public BigDialogue dialogue6;
+    public AudioSource source;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,6 +33,7 @@ public class Floor4Manager : MonoBehaviour
                 player.transform.position = new Vector2(-8.68f, -1.8f);
                 sonny.transform.position = new Vector2(-4.6f, -0.68f);
                 progress = 6;
+                source.Play();
                 break;
         }
 
@@ -145,6 +146,7 @@ public class Floor4Manager : MonoBehaviour
         playerShadow.SetActive(true);
         yield return new WaitForSeconds(2);
         BigDialogue newDialogue = Instantiate(dialogue3);
+        source.Play();
     }
 
     private IEnumerator Cutscene4()

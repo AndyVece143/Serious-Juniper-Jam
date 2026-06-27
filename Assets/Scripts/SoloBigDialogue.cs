@@ -1,9 +1,6 @@
 using System.Collections;
-using System.Security;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Recorder.OutputPath;
 
 public class SoloBigDialogue : MonoBehaviour
 {
@@ -44,6 +41,9 @@ public class SoloBigDialogue : MonoBehaviour
 
     public bool level4;
     private Floor4Manager floor4Manager;
+
+    public bool juniper;
+    private JuniperManager juniperManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -74,6 +74,10 @@ public class SoloBigDialogue : MonoBehaviour
         if (level4)
         {
             floor4Manager = Floor4Manager.FindAnyObjectByType<Floor4Manager>();
+        }
+        if (juniper)
+        {
+            juniperManager = JuniperManager.FindAnyObjectByType<JuniperManager>();
         }
         BeginningSprite();
         SetPositions();
@@ -214,6 +218,10 @@ public class SoloBigDialogue : MonoBehaviour
         if (level4)
         {
             floor4Manager.StartCutscene();
+        }
+        if (juniper)
+        {
+            juniperManager.StartCutscene();
         }
 
         mainCamera.state = mainCamera.initialState;

@@ -16,6 +16,7 @@ public class CameraController : MonoBehaviour
         StayStill,
         Earthquake,
         Sliding,
+        FollowPlayer2
     }
     public State state;
     public State initialState;
@@ -42,6 +43,9 @@ public class CameraController : MonoBehaviour
             case State.Sliding:
                 Sliding();
                 break;
+            case State.FollowPlayer2:
+                FollowPlayer2();
+                break;
         }
 
         transform.position = new Vector3(transform.position.x, transform.position.y, -10);
@@ -59,6 +63,23 @@ public class CameraController : MonoBehaviour
         if (targetPosition.x > 7.5f)
         {
             targetPosition.x = 7.5f;
+        }
+
+        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+    }
+
+    private void FollowPlayer2()
+    {
+        Vector3 targetPosition = player.position + offset;
+        targetPosition.y = 0;
+
+        if (targetPosition.x < -7.5f)
+        {
+            targetPosition.x = -7.5f;
+        }
+        if (targetPosition.x > 0.35f)
+        {
+            targetPosition.x = 0.35f;
         }
 
         transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);

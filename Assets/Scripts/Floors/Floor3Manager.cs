@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using static UnityEditor.FilePathAttribute;
 
 public class Floor3Manager : MonoBehaviour
 {
@@ -21,6 +20,7 @@ public class Floor3Manager : MonoBehaviour
     public BigDialogue dialogue3;
     public BigDialogue dialogue4;
     public BigDialogue dialogue5;
+    public AudioSource source;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,6 +39,7 @@ public class Floor3Manager : MonoBehaviour
                 phoebe.transform.position = new Vector2(-2.39f, -1.8f);
                 mainCamera.transform.position = new Vector3(-5.4f, 0, -10);
                 progress = 5;
+                source.Play();
                 break;
         }
 
@@ -127,11 +128,13 @@ public class Floor3Manager : MonoBehaviour
         yield return new WaitForSeconds(1);
         player.StopMoving(0);
         BigDialogue newDialogue = Instantiate(dialogue3);
+        source.Play();
     }
 
     private IEnumerator Cutscene4()
     {
         yield return new WaitForSeconds(1);
+        source.Stop();
         globalLight.intensity = 0;
         SoundManager.instance.PlaySound(lightSound);
         yield return new WaitForSeconds(1);

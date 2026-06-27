@@ -1,8 +1,6 @@
 using System.Collections;
 using TMPro;
-using Unity.VectorGraphics;
 using UnityEngine;
-using static UnityEditor.Recorder.OutputPath;
 
 public class InspectBox : MonoBehaviour
 {

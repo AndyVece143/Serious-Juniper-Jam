@@ -38,6 +38,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Juniper.unity
     guid: 305613e71366c0143863d9aeb02fe4a8
+  - enabled: 1
+    path: Assets/Scenes/Epilogue.unity
+    guid: adfaa4551f3897741b9a600aa5e415f4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

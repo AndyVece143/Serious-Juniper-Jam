@@ -12,6 +12,7 @@ public class Floor2Manager : MonoBehaviour
     private int progress;
     public AudioClip earthquake;
     public LevelLoader loader;
+    public AudioSource source;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,6 +22,7 @@ public class Floor2Manager : MonoBehaviour
             player.transform.position = new Vector2(-3.5f, -1.8f);
             mainCamera.state = CameraController.State.StayStill;
             mainCamera.transform.position = new Vector3(0, 0, -10);
+            source.Play();
             progress = 4;
         }
         StartCutscene();
@@ -70,11 +72,13 @@ public class Floor2Manager : MonoBehaviour
         StartCoroutine(mainCamera.GoToPlace(new Vector3(0, 0, -10), 3));
         yield return new WaitForSeconds(3);
         BigDialogue newDialogue = Instantiate(dialogue2);
+        source.Play();
     }
 
     private IEnumerator Cutscene3()
     {
         yield return new WaitForSeconds(0.5f);
+        source.Stop();
         mainCamera.SwitchToEarthquake();
         SoundManager.instance.PlaySound(earthquake);
         player.StopMoving(2);
